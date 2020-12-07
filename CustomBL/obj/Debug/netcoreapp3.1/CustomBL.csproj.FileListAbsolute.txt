@@ -1,0 +1,12 @@
+C:\Users\user\source\repos\Custom App\CustomBL\bin\Debug\netcoreapp3.1\CustomBL.deps.json
+C:\Users\user\source\repos\Custom App\CustomBL\bin\Debug\netcoreapp3.1\CustomBL.dll
+C:\Users\user\source\repos\Custom App\CustomBL\obj\Debug\netcoreapp3.1\CustomBL.csprojAssemblyReference.cache
+C:\Users\user\source\repos\Custom App\CustomBL\obj\Debug\netcoreapp3.1\CustomBL.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\Custom App\CustomBL\obj\Debug\netcoreapp3.1\CustomBL.AssemblyInfo.cs
+C:\Users\user\source\repos\Custom App\CustomBL\bin\Debug\netcoreapp3.1\CustomBL.runtimeconfig.json
+C:\Users\user\source\repos\Custom App\CustomBL\bin\Debug\netcoreapp3.1\CustomBL.runtimeconfig.dev.json
+C:\Users\user\source\repos\Custom App\CustomBL\obj\Debug\netcoreapp3.1\CustomBL.genruntimeconfig.cache
+C:\Users\user\source\repos\Custom App\CustomBL\bin\Debug\netcoreapp3.1\CustomBL.pdb
+C:\Users\user\source\repos\Custom App\CustomBL\obj\Debug\netcoreapp3.1\CustomBL.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\Custom App\CustomBL\obj\Debug\netcoreapp3.1\CustomBL.dll
+C:\Users\user\source\repos\Custom App\CustomBL\obj\Debug\netcoreapp3.1\CustomBL.pdb
