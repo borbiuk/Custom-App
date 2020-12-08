@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\source\\repos\\Custom App\\CustomCMD\\CustomCMD.csproj": {}
+    "C:\\projects\\Custom-App\\CustomCMD\\CustomCMD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\source\\repos\\Custom App\\CustomBL\\CustomBL.csproj": {
+    "C:\\projects\\Custom-App\\CustomBL\\CustomBL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\Custom App\\CustomBL\\CustomBL.csproj",
+        "projectUniqueName": "C:\\projects\\Custom-App\\CustomBL\\CustomBL.csproj",
         "projectName": "CustomBL",
-        "projectPath": "C:\\Users\\user\\source\\repos\\Custom App\\CustomBL\\CustomBL.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\Custom App\\CustomBL\\obj\\",
+        "projectPath": "C:\\projects\\Custom-App\\CustomBL\\CustomBL.csproj",
+        "packagesPath": "C:\\Users\\borbi\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\Custom-App\\CustomBL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\borbi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,10 +25,12 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\projects\\unicorn\\Nuget\\Repos": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +42,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -64,21 +70,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\user\\source\\repos\\Custom App\\CustomCMD\\CustomCMD.csproj": {
+    "C:\\projects\\Custom-App\\CustomCMD\\CustomCMD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\Custom App\\CustomCMD\\CustomCMD.csproj",
+        "projectUniqueName": "C:\\projects\\Custom-App\\CustomCMD\\CustomCMD.csproj",
         "projectName": "CustomCMD",
-        "projectPath": "C:\\Users\\user\\source\\repos\\Custom App\\CustomCMD\\CustomCMD.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\Custom App\\CustomCMD\\obj\\",
+        "projectPath": "C:\\projects\\Custom-App\\CustomCMD\\CustomCMD.csproj",
+        "packagesPath": "C:\\Users\\borbi\\.nuget\\packages\\",
+        "outputPath": "C:\\projects\\Custom-App\\CustomCMD\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\borbi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -86,13 +95,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\projects\\unicorn\\Nuget\\Repos": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\user\\source\\repos\\Custom App\\CustomBL\\CustomBL.csproj": {
-                "projectPath": "C:\\Users\\user\\source\\repos\\Custom App\\CustomBL\\CustomBL.csproj"
+              "C:\\projects\\Custom-App\\CustomBL\\CustomBL.csproj": {
+                "projectPath": "C:\\projects\\Custom-App\\CustomBL\\CustomBL.csproj"
               }
             }
           }
@@ -105,6 +116,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -132,7 +144,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
