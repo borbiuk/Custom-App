@@ -1,4 +1,4 @@
-﻿namespace CustomBL.Enums
+﻿namespace Custom.BL.Enums
 {
     public enum FuelType
     {

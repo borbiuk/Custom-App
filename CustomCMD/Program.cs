@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CustomBL.Enums;
-using CustomBL.Services;
+using Custom.BL.Enums;
+using Custom.BL.Services;
 
-namespace CustomCMD
+namespace Custom.Cmd
 {
     class Program
     {
@@ -40,7 +40,7 @@ namespace CustomCMD
             }
             SayBye();
         }
-     
+
         private static bool Process()
         {
             var command = Console.ReadKey().Key;
@@ -55,11 +55,17 @@ namespace CustomCMD
 
                         Console.WriteLine("Enter the fuel type: ");
                         ShowFuelTypes();
-                        var IsfuelType = Enum.TryParse(Console.ReadLine(), out FuelType fuelType);
 
-                        var result = CustomService.GetCarCustomValue(price, year, engineVolume, fuelType);
-                        Console.WriteLine(result);
-                        
+                        if (Enum.TryParse(Console.ReadLine(), out FuelType fuelType))
+                        {
+                            var result = CustomService.GetCarCustomValue(engineVolume, fuelType, price, year);
+                            Console.WriteLine(result);
+                        }
+                        else
+                        {
+                            
+                        }
+
                         //TODO: later...
                         //AskToSave();
                         //DataService.SaveToJson(result, pathToFile, other params ...)
@@ -140,7 +146,7 @@ namespace CustomCMD
                     if (year > DateTime.Parse("01.01.1900") && year < DateTime.Now)
                         break;
                     else
-                        Console.WriteLine($"Not the correct {value} format");                
+                        Console.WriteLine($"Not the correct {value} format");
                 }
             }
             return year;
