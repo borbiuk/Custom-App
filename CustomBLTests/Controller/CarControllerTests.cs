@@ -25,23 +25,18 @@ namespace CustomBL.Controller.Tests
         public void SaveTest()
         {
             // Arrange
-            var mark = Guid.NewGuid().ToString();
-            var model = Guid.NewGuid().ToString();
-            var price = 8000;
-            var year = Convert.ToDateTime("25.12.2012");
-            var volume = 3000;
-            var typeEngine = 1;
+            //var mark = Guid.NewGuid().ToString();
+            //var model = Guid.NewGuid().ToString();
+            //var price = 8000;
+            //var year = Convert.ToDateTime("25.12.2012");
+            //var volume = 3000;
+            //var typeEngine = 1;
 
             // Act
-            var controller = new CarController(mark, model, price, year, volume, typeEngine);
+            
 
             // Assert
-            Assert.AreEqual(mark, controller.Car.Mark);
-            Assert.AreEqual(model, controller.Car.Model);
-            Assert.AreEqual(price, controller.Car.Price);
-            Assert.AreEqual(year, controller.Car.Year);
-            Assert.AreEqual(volume, controller.Car.Volume);
-            Assert.AreEqual(typeEngine, controller.Car.TypeEngine);
+
 
         }
         [TestMethod()]

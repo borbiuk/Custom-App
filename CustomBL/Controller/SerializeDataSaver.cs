@@ -18,16 +18,5 @@ namespace CustomBL.Controller
                 formatter.Serialize(fs, item);
             }
         }
-        //public T Load<T>() where T : class
-        //{
-        //    var formatter = new BinaryFormatter();
-        //    var fileName = typeof(T).Name;
-
-        //    using (var fs = new FileStream(fileName, FileMode.OpenOrCreate))
-        //    {
-        //        T item = (T)formatter.Deserialize(fs);
-        //        return item;
-        //    }
-        //}
     }
 }

@@ -6,15 +6,13 @@ using System.Text;
 
 namespace CustomBL.Controller
 {
-    public class ApplicationContext : DbContext
+    public class CustomApplicationContext : DbContext
     {
-        public DbSet<Electric> Electrics { get; set; }
-        public DbSet<Hybrid> Hybrids { get; set; }
-        public DbSet<MotorCycle> MotorCycles { get; set; }
+        public DbSet<Bike> Bikes { get; set; }
         public DbSet<Car> Cars { get; set; }
-        public DbSet<Trucs> Trucs { get; set; }
+        public DbSet<Truck> Trucs { get; set; }
 
-        public ApplicationContext()
+        public CustomApplicationContext()
         {
             Database.EnsureCreated();
         }

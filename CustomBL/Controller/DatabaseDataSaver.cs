@@ -9,20 +9,11 @@ namespace CustomBL.Controller
     {
         public void Save<T>(T item) where T : class
         {
-            using (var db = new ApplicationContext())
+            using (var db = new CustomApplicationContext())
             {
-                db.Set<T>().Add(item);          /// розібратися
+                db.Set<T>().Add(item);          
                 db.SaveChanges();
             }
         }
-
-        //public T Load<T>() where T : class
-        //{
-        //    using (var db = new ApplicationContext())
-        //    {
-        //        T result = db.Set<T>(T);        
-        //        return result ;          
-        //    }
-        //}
     }
 }
