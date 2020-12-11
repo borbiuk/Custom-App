@@ -11,9 +11,5 @@ namespace CustomBL.Controller
         {
             manager.Save(item);
         }
-        //protected T Load<T>() where T : class
-        //{
-        //    return manager.Load<T>();
-        //}
     }
 }

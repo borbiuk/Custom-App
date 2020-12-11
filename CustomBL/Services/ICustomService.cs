@@ -5,8 +5,8 @@ namespace CustomBL.Services
 {
     public interface ICustomService
     {
-        double GetCarCustomValue(double price, DateTime year, int engineVolume, FuelType fuelType);
-        double GetTruckCustomValue(double price, DateTime year, int engineVolume, int fullWeight, FuelType fuelType);
-        double GetBikeCustomValue(double price, DateTime year, int engineVolume);
+        double GetCarCustomValue(int price, DateTime year, int engineVolume, FuelType fuelType);
+        double GetTruckCustomValue(int price, DateTime year, int engineVolume, int fullWeight);
+        double GetBikeCustomValue(int price, DateTime year, int engineVolume);
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CustomBL.Migrations
 {
-    [DbContext(typeof(ApplicationContext))]
+    [DbContext(typeof(CustomApplicationContext))]
     [Migration("20201204183628_initial2")]
     partial class initial2
     {
