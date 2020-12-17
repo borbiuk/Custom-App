@@ -49,21 +49,26 @@ namespace Custom.Cmd
                 switch (command)
                 {
                     case ConsoleKey.C:
-                        var price = ParsePrice("price");
-                        var year = ParseDateTime("year");
-                        var engineVolume = ParseEngineVolume("engine volume");
-
-                        Console.WriteLine("Enter the fuel type: ");
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Enter the fuel type: ");  // 0-Diesel, 1-Gas, 2-Electric
                         ShowFuelTypes();
+                        Enum.TryParse(Console.ReadLine(), out FuelType fuelType);  
 
-                        if (Enum.TryParse(Console.ReadLine(), out FuelType fuelType))
-                        {
-                            var result = CustomService.GetCarCustomValue(engineVolume, fuelType, price, year);
-                            Console.WriteLine(result);
+                        if (fuelType == FuelType.Electric)  // TODO: ConselKey для  FuelType?
+                        {                                   
+                            var carEnginePower = ParseInt("engine power in KW");
+                            var electricCarResult = CustomService.GetCarCustomValue(fuelType, carEnginePower);
+                            Console.WriteLine($"Full payment : {electricCarResult} EUR.");
                         }
                         else
                         {
-                            
+                            var carPrice = ParsePrice("price");
+                            var carYear = ParseDateTime("year");
+                            var carEngineVolume = ParseInt("engine volume in cubic centimeters");
+
+                            var carResult = CustomService.GetCarCustomValue(fuelType, carEngineVolume, carPrice, carYear);
+                            Console.WriteLine($"Full payment : {carResult} EUR.");
                         }
 
                         //TODO: later...
@@ -72,10 +77,26 @@ namespace Custom.Cmd
                         break;
 
                     case ConsoleKey.T:
+                        var truckPrice = ParsePrice("price");
+                        var truckYear = ParseDateTime("year");
+                        var truckEngineVolume = ParseInt("engine volume in cubic centimeters");
+                        var truckFullWeight = ParseInt("full weight in kilograms");
+
+                        var truckResult = CustomService.GetTruckCustomValue(truckPrice, truckYear, truckEngineVolume, truckFullWeight);
+                        Console.WriteLine($"Full payment : {truckResult} EUR.");
 
                         break;
+
                     case ConsoleKey.B:
+                        var bikePrice = ParsePrice("price");
+                        var bikeYear = ParseDateTime("year");
+                        var bikeEngineVolume = ParseInt("engine volume in cubic centimeters");
+
+                        var bikeResult = CustomService.GetBikeCustomValue(bikePrice, bikeYear, bikeEngineVolume);
+                        Console.WriteLine($"Full payment : {bikeResult} EUR.");
+
                         break;
+
                     case ConsoleKey.Q:
                         return false;
                 }
@@ -95,11 +116,13 @@ namespace Custom.Cmd
 
         private static void SayBye()
         {
+            Console.WriteLine();
             Console.WriteLine("Bye!");
         }
 
         private static void ShowCommands()
         {
+            Console.WriteLine();
             Console.WriteLine("Choose your vehicle:");
             foreach (var key in CommandsNames.Keys)
             {
@@ -121,18 +144,19 @@ namespace Custom.Cmd
 
         private static int ParsePrice(string name)
         {
+            int value;
             while (true)
             {
-                Console.WriteLine();
-                Console.Write($"Enter the {name} in EUR: ");
-                if (int.TryParse(Console.ReadLine(), out int value))
+                Console.WriteLine($"Enter the {name} in EUR: ");
+                if (int.TryParse(Console.ReadLine(), out value))
                 {
-                    if (value < 99 && value > 15000000)
-                        Console.WriteLine($"Not the correct {name} format");
+                    if (value > 99 && value < 15_000_000)
+                        break;                     
                     else
-                        return value;
+                        Console.WriteLine($"Not the correct {name} format");
                 }
             }
+            return value;
         }
 
         private static DateTime ParseDateTime(string value)
@@ -152,11 +176,11 @@ namespace Custom.Cmd
             return year;
         }
 
-        private static int ParseEngineVolume(string name)
+        private static int ParseInt(string name)
         {
             while (true)
             {
-                Console.Write($"Enter the {name} in cubic centimeter: ");
+                Console.Write($"Enter the {name} : ");
                 if (int.TryParse(Console.ReadLine(), out int value))
                 {
                     return value;
