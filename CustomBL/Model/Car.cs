@@ -9,6 +9,5 @@ namespace Custom.BL.Model
         public DateTime Year { get; set; }
         public int EngineVolume { get; set; }
         public Enum FuelType { get; set; }
-        public int Result { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+﻿@using Custom.BL.Enums;
+@model CustomViewModel;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<h2>
+    Калькулятор розмитнення
+</h2>
+
+<div>
+    <table style="width:100%">
+        <tr>
+            <th>Type of car</th>
+            <th>@Html.DropDownList("Last Ten Years", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select a Year")</th>
+        </tr>
+        <tr>
+            <th>Fuel type</th>
+            <th>
+                <select asp-for="FuelType" asp-items="Html.GetEnumSelectList<FuelType>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <th>@Html.DropDownList("Price", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select A Price")</th>
+        </tr>
+        <tr>
+            <th>Year</th>
+            <th>@Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select A Year")</th>
+        </tr>
+        <tr>
+            <th>Engine volume</th>
+            <th>@Html.DropDownList("Engine volume", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select A Engine volume")</th>
+        </tr>
+        <tr>
+            <th>Full weight</th>
+            <th>@Html.DropDownList("Full weight", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select A Full weight")</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th> <input type="submit" value="Calculate" /> </th>
+        </tr>
+    </table>
+</div>
+
+
+

@@ -8,6 +8,5 @@ namespace Custom.BL.Model
         public int Price { get; set; }
         public DateTime Year { get; set; }
         public int EngineVolume { get; set; }
-        public int Result { get; set; }
     }
 }

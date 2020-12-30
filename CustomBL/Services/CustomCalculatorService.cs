@@ -46,25 +46,16 @@ namespace Custom.BL.Services
             return fullPayment;
         }
 
-        /// <summary>
-        /// Мито
-        /// </summary>
         private static int GetImportDuty(int price) => price / 10;
 
-        /// <summary>
-        /// ПДВ
-        /// </summary>
         private static int GetVat(int price, int importDuty, int exciseValue) =>
             Convert.ToInt32((price + importDuty + exciseValue) * 0.2);
 
-        /// <summary>
-        /// Кінцевий результат
-        /// </summary>
         private static int GetFullPayment(int exciseTax, int importDuty, int vat) => 
             Convert.ToInt32(exciseTax + importDuty + vat);
         
         /// <summary>
-        /// Кількість повних років
+        /// Рахує кількість повних років
         /// </summary>
         /// <param name="year"> Рік транспортного засобу. </param>
         /// <returns></returns>
@@ -76,7 +67,7 @@ namespace Custom.BL.Services
         }
 
         /// <summary>
-        /// Акциз для легкових автомобілів
+        /// Рахує акциз для легкових автомобілів
         /// </summary>
         /// <param name="year"> Рік легкового автомобіля </param>
         /// <param name="fuelType"> Тип пального легкового автомобіля </param>
@@ -103,7 +94,7 @@ namespace Custom.BL.Services
         }
 
         /// <summary>
-        /// Акциз для вантажних автомобілів
+        /// Рахує акциз для вантажних автомобілів
         /// </summary>
         /// <param name="year"> Рік вантажного автомобіля </param>
         /// <param name="fullWeight"> Повна масса вантажного автомобіля </param>
@@ -132,9 +123,9 @@ namespace Custom.BL.Services
 
             return (int)Math.Round(res, 0);
         }
-
+       
         /// <summary>
-        /// Акциз для мото транспорту
+        /// Рахує акциз для мото транспорту
         /// </summary>
         /// <param name="year"> Рік мото транспорту </param>
         /// <param name="engineVolume"> Потужність мото транспорту </param>

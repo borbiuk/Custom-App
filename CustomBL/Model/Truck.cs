@@ -10,6 +10,5 @@ namespace Custom.BL.Model
         public int EngineVolume { get; set; }
         public Enum FuelType { get; set; }
         public int FullMass { get; set; }
-        public int Result { get; set; }
     }
 }
