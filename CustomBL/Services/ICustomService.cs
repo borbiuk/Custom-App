@@ -1,11 +1,11 @@
 ﻿using System;
-using CustomBL.Enums;
+using Custom.BL.Enums;
 
-namespace CustomBL.Services
+namespace Custom.BL.Services
 {
     public interface ICustomService
     {
-        double GetCarCustomValue(int price, DateTime year, int engineVolume, FuelType fuelType);
+        double GetCarCustomValue(FuelType fuelType, int engineVolume,  int price = default, DateTime year = default);
         double GetTruckCustomValue(int price, DateTime year, int engineVolume, int fullWeight);
         double GetBikeCustomValue(int price, DateTime year, int engineVolume);
     }

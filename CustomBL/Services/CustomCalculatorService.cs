@@ -1,143 +1,148 @@
 ﻿using System;
-using CustomBL.Enums;
-using CustomBL.Model;
+using Custom.BL.Enums;
 
-namespace CustomBL.Services
+namespace Custom.BL.Services
 {
     public class CustomCalculatorService : ICustomService
-    {
-        private int importDuty;     // Ввізне мито 
-        private double exciseTax;   // Акцизний податок        
-        private int _Vat;           // ПДВ
-        private double rate;        // Ставка
-        private int fullYears;      // Повні роки
-        private int fullPayments;   // Кінцевий резульат 
-        
-        public double GetCarCustomValue(int price, DateTime year, int engineVolume, FuelType fuelType)
-        {
-            ImportDuty(price);
-            CarExciseTax(year, fuelType, engineVolume);
-            Vat(price);
-            FullPayment();
-            return fullPayments;
-        }
-
-        public double GetCarCustomValue(int engineVolume, FuelType fuelType)
+    {   
+        public double GetCarCustomValue(FuelType fuelType, int engineVolume,  int price = default, DateTime year = default)
         {
             if (fuelType == FuelType.Electric)
             {
-                engineVolume = fullPayments;
+                return engineVolume;
             }
-            return fullPayments;
+
+            if (price == default || year == default)
+            {
+                throw new ArgumentException(
+                    "Price and Year are mandatory parameters for not Electric cars Custom calculating");
+            }
+
+            var importDuty = GetImportDuty(price);
+            var exciseValue = GetCarExciseValue(year, fuelType, engineVolume);
+            var vat = GetVat(price, importDuty, exciseValue);
+            var fullPayment = GetFullPayment(exciseValue, importDuty, vat);
+
+            return fullPayment;
         }
 
         public double GetTruckCustomValue(int price, DateTime year, int engineVolume, int fullWeight)
         {
-            ImportDuty(price);
-            TruckExciseTax(year, fullWeight, engineVolume) ;
-            Vat(price);
-            FullPayment();
-            return fullPayments;
+            var importDuty = GetImportDuty(price);
+            var exciseValue = GetTruckExciseValue(year, fullWeight, engineVolume);
+            var vat = GetVat(price, importDuty, exciseValue);
+            var fullPayment = GetFullPayment(exciseValue, importDuty, vat);
+
+            return fullPayment;
         }
 
         public double GetBikeCustomValue(int price, DateTime year, int engineVolume)
         {
-            ImportDuty(price);
-            BikeExciseTax(year, engineVolume);
-            Vat(price);
-            FullPayment();
-            return fullPayments;
+            var importDuty = GetImportDuty(price);
+            var exciseValue = GetBikeExciseValue(year, engineVolume);
+            var vat = GetVat(price, importDuty, exciseValue);
+            var fullPayment = GetFullPayment(exciseValue, importDuty, vat);
+
+            return fullPayment;
         }
 
-        private int ImportDuty(int price)                                // Мито
+        private static int GetImportDuty(int price) => price / 10;
+
+        private static int GetVat(int price, int importDuty, int exciseValue) =>
+            Convert.ToInt32((price + importDuty + exciseValue) * 0.2);
+
+        private static int GetFullPayment(int exciseTax, int importDuty, int vat) => 
+            Convert.ToInt32(exciseTax + importDuty + vat);
+        
+        /// <summary>
+        /// Рахує кількість повних років
+        /// </summary>
+        /// <param name="year"> Рік транспортного засобу. </param>
+        /// <returns></returns>
+        private int GetCountOfFullYears(DateTime year)
         {
-            return importDuty = (price * 10) / 100;
+            var now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+            var dob = int.Parse(year.ToString("yyyyMMdd"));
+            return (now - dob) / 10000;
         }
 
-        private int Vat(int price)                                       // ПДВ
+        /// <summary>
+        /// Рахує акциз для легкових автомобілів
+        /// </summary>
+        /// <param name="year"> Рік легкового автомобіля </param>
+        /// <param name="fuelType"> Тип пального легкового автомобіля </param>
+        /// <param name="engineVolume"> Потужність легкового автомобіля </param>
+        /// <returns></returns>
+        private int GetCarExciseValue(DateTime year, FuelType fuelType, int engineVolume)
         {
-            return _Vat = Convert.ToInt32((price + importDuty + exciseTax) * 0.2);
-        }
+            var totalYearsCount = GetCountOfFullYears(year);
 
-        private int FullPayment()                                        // Кінцевий результат
-        {
-            return fullPayments = Convert.ToInt32(exciseTax + importDuty + _Vat);
-        }
-
-        private int CountFullYears(DateTime year)
-        {
-            int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));     
-            int dob = int.Parse(year.ToString("yyyyMMdd"));                     
-            fullYears = (now - dob) / 10000;
-            return fullYears;
-        }
-
-        private double CarExciseTax(DateTime year, FuelType fuelType, double engineVolume)       // Акциз для Car          
-        {
-            CountFullYears(year);
-
-            if (fuelType == FuelType.Diesel )
+            var rate = fuelType switch
             {
-                rate = engineVolume < 3000 ? 50 : 100;
-                if(fullYears > 15)
-                    exciseTax = rate * (engineVolume / 1000) * 15;
-                else
-                    exciseTax = rate * (engineVolume / 1000) * fullYears;                           
-            }
-            else if (fuelType == FuelType.Gas)
-            {
-                rate = engineVolume < 3500 ? 75 : 150;
-                if (fullYears > 15)
-                    exciseTax = rate * (engineVolume / 1000) * 15;
-                else
-                    exciseTax = rate * (engineVolume / 1000) * fullYears;
-            }
-            return Math.Round(exciseTax, 0);
+                FuelType.Diesel => engineVolume < 3000 ? 50 : 100,
+                FuelType.Gas => engineVolume < 3500 ? 75 : 150,
+                _ => throw new ArgumentException("Invalid Fuel Type for Rate calculating")
+            };
+
+            rate = totalYearsCount > 15
+                ? rate * 15
+                : rate * totalYearsCount;
+
+            var res = rate * engineVolume / 1000.0;
+
+            return (int) Math.Round(res, 0);
         }
 
-        private double TruckExciseTax(DateTime year, int fullWeight, int engineVolume)
+        /// <summary>
+        /// Рахує акциз для вантажних автомобілів
+        /// </summary>
+        /// <param name="year"> Рік вантажного автомобіля </param>
+        /// <param name="fullWeight"> Повна масса вантажного автомобіля </param>
+        /// <param name="engineVolume"> Потужність вантажного автомобіля </param>
+        /// <returns></returns>
+        private int GetTruckExciseValue(DateTime year, int fullWeight, int engineVolume)
         {
-            CountFullYears(year);
+            var totalYearsCount = GetCountOfFullYears(year);
+           
+            double rate = default;
 
             if (fullWeight < 5000)
             {
-                if(fullYears < 5)
-                    rate = 0.02;
-                else if (fullYears > 5 && fullYears < 8)
-                    rate = 0.8;
-                else if (fullYears > 8)
-                    rate = 1;
-
-                exciseTax = rate * (engineVolume / 1000) * fullYears;
+                if (totalYearsCount < 5) rate = 0.02;
+                else if (totalYearsCount > 5 && totalYearsCount < 8) rate = 0.8;
+                else if (totalYearsCount > 8) rate = 1;
             }
             else if (fullWeight > 5000)
             {
-                if (fullYears < 5)
-                    rate = 0.026;
-                else if (fullYears > 5 && fullYears < 8)
-                    rate = 1.04;
-                else if (fullYears > 8)
-                    rate = 1.3;
-
-                exciseTax = rate * (engineVolume / 1000) * fullYears;
+                if (totalYearsCount < 5) rate = 0.026;
+                else if (totalYearsCount > 5 && totalYearsCount < 8) rate = 1.04;
+                else if (totalYearsCount > 8) rate = 1.3;
             }
-            return Math.Round(exciseTax, 0);
+
+            var res = rate * (engineVolume / 1000) * totalYearsCount;
+
+            return (int)Math.Round(res, 0);
         }
-
-        private double BikeExciseTax(DateTime year, int engineVolume)
+       
+        /// <summary>
+        /// Рахує акциз для мото транспорту
+        /// </summary>
+        /// <param name="year"> Рік мото транспорту </param>
+        /// <param name="engineVolume"> Потужність мото транспорту </param>
+        /// <returns></returns>
+        private int GetBikeExciseValue(DateTime year, int engineVolume)
         {
-            CountFullYears(year);
+            var totalYearsCount = GetCountOfFullYears(year);
+            
+            double rate = default;
 
-            if (engineVolume < 500)
-                rate = 0.062;
-            else if (engineVolume > 500 && engineVolume < 800)
-                rate = 0.443;
-            else if (engineVolume > 800)
-                rate = 0.447;
+            if (engineVolume < 500) rate = 0.062;
+            else if (engineVolume > 500 && engineVolume < 800) rate = 0.443;
+            else if (engineVolume > 800) rate = 0.447;
 
-            exciseTax = rate * (engineVolume / 1000) * fullYears;
+            var res = rate * (engineVolume / 1000) * totalYearsCount;
 
-            return Math.Round(exciseTax, 0);
+            return (int)Math.Round(res, 0);
         }
     }
 }

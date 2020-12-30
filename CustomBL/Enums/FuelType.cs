@@ -1,9 +1,11 @@
-﻿namespace CustomBL.Enums
+﻿using System;
+
+namespace Custom.BL.Enums
 {
     public enum FuelType
     {
-        Diesel,
-        Gas,
-        Electric,
+        Diesel = 1,
+        Gas = 2,
+        Electric = 3,
     }
 }
