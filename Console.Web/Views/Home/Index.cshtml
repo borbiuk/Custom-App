@@ -1,50 +1,51 @@
-﻿@using Custom.BL.Enums;
-@model CustomViewModel;
-@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Custom.BL.Enums
+@model CustomViewModel
 
+<form asp-controller="Home" asp-action="Index" method="post">
+    <div class="form-group">
 
-<h2>
-    Калькулятор розмитнення
-</h2>
+        <div class="row">
+            <label asp-for="CarType" class="col-lg-2"></label>
+            <select asp-for="CarType" class="col-lg-2" asp-items="Html.GetEnumSelectList<CarType>()">
+                <option selected="selected" value="">Select Car Type</option>
+            </select>
+        </div>
 
-<div>
-    <table style="width:100%">
-        <tr>
-            <th>Type of car</th>
-            <th>@Html.DropDownList("Last Ten Years", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select a Year")</th>
-        </tr>
-        <tr>
-            <th>Fuel type</th>
-            <th>
-                <select asp-for="FuelType" asp-items="Html.GetEnumSelectList<FuelType>()">
-                    <option selected="selected" value="">Please select</option>
-                </select>
-            </th>
-        </tr>
-        <tr>
-            <th>Price</th>
-            <th>@Html.DropDownList("Price", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select A Price")</th>
-        </tr>
-        <tr>
-            <th>Year</th>
-            <th>@Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select A Year")</th>
-        </tr>
-        <tr>
-            <th>Engine volume</th>
-            <th>@Html.DropDownList("Engine volume", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select A Engine volume")</th>
-        </tr>
-        <tr>
-            <th>Full weight</th>
-            <th>@Html.DropDownList("Full weight", (IEnumerable<SelectListItem>)ViewBag.LastTenYears, "Select A Full weight")</th>
-        </tr>
-        <tr>
-            <th></th>
-            <th> <input type="submit" value="Calculate" /> </th>
-        </tr>
-    </table>
-</div>
+        <div class="row">
+            <label asp-for="FuelType" class="col-lg-2"></label>
+            <select asp-for="FuelType" class="col-lg-2" asp-items="Html.GetEnumSelectList<FuelType>()">
+                <option selected="selected" value="">Select Fuel Type</option>
+            </select>
+        </div>
 
+        <div class="row">
+            <label asp-for="EngineVolume" class="col-lg-2"></label>
+            <input type="number" asp-for="EngineVolume" class="col-lg-2"/>
+        </div>
 
+        <div class="row">
+            <label asp-for="Price" class="col-lg-2"></label>
+            <input type="number" asp-for="Price" class="col-lg-2"/>
+        </div>
 
+        <div class="row">
+            <label asp-for="Year" class="col-lg-2"></label>
+            <input type="datetime-local" asp-format="{0:yyyy-MM-dd}" asp-for="Year" class="col-lg-2"/>
+        </div>
+
+        <div class="row">
+            <label asp-for="FuelWeight" class="col-lg-2"></label>
+            <input type="number" asp-for="FuelWeight" class="col-lg-2"/>
+        </div>
+
+        <div class="row">
+            <label asp-for="Result" class="col-lg-2"></label>
+            <input type="number" disabled="disabled" class="col-lg-2" asp-for="Result"/>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Submit" asp-action="Index"/>
+        </div>
+
+    </div>
+</form>

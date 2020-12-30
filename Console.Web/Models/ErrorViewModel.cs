@@ -1,5 +1,3 @@
-using System;
-
 namespace Console.Web.Models
 {
     public class ErrorViewModel
