@@ -4,8 +4,8 @@ using Custom.BL.Enums;
 namespace Custom.BL.Services
 {
     public class CustomCalculatorService : ICustomService
-    {   
-        public double GetCarCustomValue(FuelType fuelType, int engineVolume,  int price = default, DateTime year = default)
+    {
+        public int GetCarCustomValue(FuelType fuelType, int engineVolume, int price = default, DateTime year = default)
         {
             if (fuelType == FuelType.Electric)
             {
@@ -26,7 +26,7 @@ namespace Custom.BL.Services
             return fullPayment;
         }
 
-        public double GetTruckCustomValue(int price, DateTime year, int engineVolume, int fullWeight)
+        public int GetTruckCustomValue(int price, DateTime year, int engineVolume, int fullWeight)
         {
             var importDuty = GetImportDuty(price);
             var exciseValue = GetTruckExciseValue(year, fullWeight, engineVolume);
@@ -36,7 +36,7 @@ namespace Custom.BL.Services
             return fullPayment;
         }
 
-        public double GetBikeCustomValue(int price, DateTime year, int engineVolume)
+        public int GetBikeCustomValue(int price, DateTime year, int engineVolume)
         {
             var importDuty = GetImportDuty(price);
             var exciseValue = GetBikeExciseValue(year, engineVolume);
@@ -51,9 +51,9 @@ namespace Custom.BL.Services
         private static int GetVat(int price, int importDuty, int exciseValue) =>
             Convert.ToInt32((price + importDuty + exciseValue) * 0.2);
 
-        private static int GetFullPayment(int exciseTax, int importDuty, int vat) => 
+        private static int GetFullPayment(int exciseTax, int importDuty, int vat) =>
             Convert.ToInt32(exciseTax + importDuty + vat);
-        
+
         /// <summary>
         /// Рахує кількість повних років
         /// </summary>
@@ -103,7 +103,7 @@ namespace Custom.BL.Services
         private int GetTruckExciseValue(DateTime year, int fullWeight, int engineVolume)
         {
             var totalYearsCount = GetCountOfFullYears(year);
-           
+
             double rate = default;
 
             if (fullWeight < 5000)
@@ -121,9 +121,9 @@ namespace Custom.BL.Services
 
             var res = rate * (engineVolume / 1000) * totalYearsCount;
 
-            return (int)Math.Round(res, 0);
+            return (int) Math.Round(res, 0);
         }
-       
+
         /// <summary>
         /// Рахує акциз для мото транспорту
         /// </summary>
@@ -133,7 +133,7 @@ namespace Custom.BL.Services
         private int GetBikeExciseValue(DateTime year, int engineVolume)
         {
             var totalYearsCount = GetCountOfFullYears(year);
-            
+
             double rate = default;
 
             if (engineVolume < 500) rate = 0.062;
@@ -142,7 +142,7 @@ namespace Custom.BL.Services
 
             var res = rate * (engineVolume / 1000) * totalYearsCount;
 
-            return (int)Math.Round(res, 0);
+            return (int) Math.Round(res, 0);
         }
     }
 }
