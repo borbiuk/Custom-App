@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Custom.BL.Model
+namespace Console.Web.Models
 {
-    public class Car
+    public class Bus
     {
         public int Id { get; set; }
         public int Price { get; set; }

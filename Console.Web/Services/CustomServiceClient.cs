@@ -1,17 +1,25 @@
-﻿using Custom.BL.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Console.Web.Models;
+using Custom.BL.Services;
 
 namespace Console.Web.Services
 {
-    public class CustomServiceClient : ICustomServieceCleint
+    public class CustomServiceClient : ICustomServiceClient
     {
-        private readonly Dictionary<FuelType, string> FuelTypesTitels;
-        public CustomServiceClient()
+        private readonly ICustomService _service;
+
+        public CustomServiceClient(ICustomService service)
         {
-            FuelTypesTitels = new Dictionary<FuelType, string>();
+            _service = service;
         }
+
+        public int GetResult(CustomViewModel model) =>
+            model.CarType switch
+            {
+                CarType.Car => _service.GetCarCustomValue(model.FuelType, model.EngineVolume, model.Price, model.Year),
+                CarType.Truck => _service.GetTruckCustomValue(model.Price, model.Year, model.EngineVolume, model.FuelWeight),
+                CarType.Bike => _service.GetBikeCustomValue(model.Price, model.Year, model.EngineVolume),
+                CarType.Bus => _service.GetBusCustomValue(model.Price, model.Year, model.EngineVolume, model.FuelType),
+                _ => throw new System.NotImplementedException()    // TOOD: інтелісенс запропонував добавити (перербити throw)
+            };
     }
 }
