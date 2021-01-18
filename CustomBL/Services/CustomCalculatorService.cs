@@ -153,6 +153,7 @@ namespace Custom.BL.Services
             var res = rate * (engineVolume / 1000) * totalYearsCount;
 
             return (int) Math.Round(res, 0);
+<<<<<<< HEAD
         }
 
         /// <summary>
@@ -190,6 +191,8 @@ namespace Custom.BL.Services
             var res = rate * (engineVolume / 1000) * totalYearsCount;
 
             return (int)Math.Round(res, 0);
+=======
+>>>>>>> 2d1ed3daede7b247a50cd4fe9c4f6130307b9ec5
         }
     }
 }
