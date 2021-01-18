@@ -12,18 +12,16 @@ namespace Console.Web.Services
             _service = service;
         }
 
-        public int GetResult(CustomViewModel model) =>
-            model.CarType switch
+        public int GetResult(CustomViewModel model)
+        {
+            return model.CarType switch
             {
                 CarType.Car => _service.GetCarCustomValue(model.FuelType, model.EngineVolume, model.Price, model.Year),
                 CarType.Truck => _service.GetTruckCustomValue(model.Price, model.Year, model.EngineVolume, model.FuelWeight),
-<<<<<<< HEAD
-                CarType.Bike => _service.GetBikeCustomValue(model.Price, model.Year, model.EngineVolume),
                 CarType.Bus => _service.GetBusCustomValue(model.Price, model.Year, model.EngineVolume, model.FuelType),
+                CarType.Bike => _service.GetBikeCustomValue(model.Price, model.Year, model.EngineVolume),
                 _ => throw new System.NotImplementedException()    // TOOD: інтелісенс запропонував добавити (перербити throw)
-=======
-                CarType.Bike => _service.GetBikeCustomValue(model.Price, model.Year, model.EngineVolume)
->>>>>>> 2d1ed3daede7b247a50cd4fe9c4f6130307b9ec5
             };
+        }
     }
 }
